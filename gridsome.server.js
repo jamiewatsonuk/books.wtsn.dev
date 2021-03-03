@@ -13,7 +13,7 @@ module.exports = function (api) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     
-    await page.goto("https://www.goodreads.com/review/list/77658975-jamie-watson?shelf=read");
+    await page.goto("https://www.goodreads.com/review/list/77658975-jamie-watson?utf8=%E2%9C%93&shelf=read&per_page=100");
 
     const books = await page.$$eval('#booksBody tr', elements => elements.map(element => {
       return {

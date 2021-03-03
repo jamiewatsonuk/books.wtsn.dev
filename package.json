@@ -1,0 +1,19 @@
+{
+  "name": "books",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "@noxify/gridsome-plugin-remote-image": "github:noxify/gridsome-plugin-remote-image",
+    "gridsome": "^0.7.0",
+    "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.6",
+    "tailwindcss": "^2.0.3"
+  }
+}

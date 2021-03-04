@@ -26,9 +26,17 @@ module.exports = function (api) {
     await page.goto(`https://www.goodreads.com/review/list/${USER_URL}?shelf=currently-reading`);
     const current = await getBooks();
 
+    await page.goto(
+      `https://www.goodreads.com/review/list/${USER_URL}?shelf=to-read`
+    );
+    const wantToRead = await getBooks();
+
     await browser.close();
 
     const booksCollection = addCollection({typeName: 'books'});
     [...current, ...books].reverse().forEach(book => booksCollection.addNode(book));
+
+    const wantToReadCollection = addCollection({typeName: 'upcomingBooks'});
+    wantToRead.reverse().forEach((book) => wantToReadCollection.addNode(book));
   })
 }

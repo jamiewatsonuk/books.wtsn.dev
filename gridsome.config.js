@@ -19,15 +19,6 @@ module.exports = {
         targetPath: "./src/assets/books",
       },
     },
-    {
-      use: "@noxify/gridsome-plugin-remote-image",
-      options: {
-        typeName: "upcomingBooks",
-        sourceField: "image",
-        targetField: "localImage",
-        targetPath: "./src/assets/books",
-      },
-    },
   ],
   css: {
     loaderOptions: {

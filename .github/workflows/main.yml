@@ -3,7 +3,7 @@ on:
   schedule:
     # Customize schedule expression at crontab.guru
     # This one runs at 800 UTC daily
-    - cron: "35 * * * *"
+    - cron: "50 * * * *"
 jobs:
   build:
     name: Call Netlify build hook

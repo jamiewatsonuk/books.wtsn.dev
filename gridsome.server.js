@@ -1,42 +1,17 @@
-const puppeteer = require('puppeteer');
+const Books = require('./Books');
 
-const USER_URL = "77658975-jamie-watson";
+const USER = 77658975;
 
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    const getBooks = async () => {
-      return await page.$$eval('#booksBody tr', elements => elements.map(element => {
-        return {
-          image: element.querySelector(".field.cover img").src.replace(/\._S[XY]\d{2}_/, ""),
-          title: element.querySelector(".field.title .value").textContent,
-          author: element.querySelector(".field.author .value").textContent,
-        }
-      }));
-    };
-
-    await page.goto(
-      `https://www.goodreads.com/review/list/${USER_URL}?utf8=%E2%9C%93&shelf=read&per_page=100`
-    );
-    const books = await getBooks();
-
-    await page.goto(`https://www.goodreads.com/review/list/${USER_URL}?shelf=currently-reading`);
-    const current = await getBooks();
-
-    await page.goto(
-      `https://www.goodreads.com/review/list/${USER_URL}?shelf=to-read`
-    );
-    const wantToRead = await getBooks();
-
-    await browser.close();
-
     const booksCollection = addCollection({typeName: 'books'});
-    [...current, ...books].reverse().forEach(book => booksCollection.addNode(book));
 
-    const wantToReadCollection = addCollection({typeName: 'upcomingBooks'});
-    wantToRead.reverse().forEach((book) => wantToReadCollection.addNode(book));
+    const [read, current, toRead] = await Promise.all([
+      Books.getBooks(USER, "read"),
+      Books.getBooks(USER, "currently-reading"),
+      Books.getBooks(USER, "to-read"),
+    ]);
+
+    [...read, ...current, ...toRead].forEach((book) => booksCollection.addNode(book));
   })
 }

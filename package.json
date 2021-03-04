@@ -15,7 +15,6 @@
     "gridsome": "^0.7.0",
     "node-fetch": "^2.6.1",
     "postcss": "^7",
-    "puppeteer": "^8.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {}

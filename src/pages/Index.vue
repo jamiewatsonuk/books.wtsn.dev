@@ -9,6 +9,16 @@
       <div
         class="grid grid-cols-3 gap-6 p-6 md:grid-cols-4 lg:grid-cols-8 auto-rows-min"
       >
+        <div class="md:col-span-2 md:row-span-2">
+          <div
+            class="relative w-full h-full overflow-hidden bg-gray-200 rounded shadow-2xl"
+          >
+            <g-image
+                  :src="currentBook.localImage"
+                  class="absolute object-cover w-full h-full"
+                />
+          </div>
+        </div>
         <div v-for="edge in $page.books.edges" :key="edge.node.title">
           <div
             class="relative w-full overflow-hidden rounded shadow-2xl"
@@ -50,6 +60,15 @@
 export default {
   metaInfo: {
     title: "Books",
+  },
+  computed: {
+    currentBook() {
+      if (this.$page.current.edges.length) {
+        return this.$page.current.edges[0].node;
+      }
+
+      return null;
+    },
   },
 };
 </script>

@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -5,6 +7,9 @@ module.exports = {
     extend: {
       spacing: {
         '3/4': '75%'
+      },
+      colors: {
+        gray: colors.warmGray
       }
     },
   },

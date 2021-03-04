@@ -1,6 +1,6 @@
 const Books = require('./Books');
 
-const USER = 77658975;
+const USER = process.env.GOODREADS_USER_ID;
 
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
